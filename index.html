@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: black;">
+    <svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+        <image x="50" y="50" width="212" height="157" href="image.png" id="kor" />
+        <rect width="800" height="600" x="0" y="0" stroke="white" fill-opacity="0">
+    </svg>
+
+
+    <script>
+        let kor = document.getElementById("kor");
+        let vx = 5.5;
+        let vy = 6;
+        let AnimFrameId;
+
+        function animate() {
+            kor.setAttribute("x", parseInt(kor.getAttribute("x"))+vx);
+            kor.setAttribute("y", parseInt(kor.getAttribute("y"))+vy);
+
+            console.log(kor.getAttribute("x"));
+            console.log(kor.getAttribute("y"));
+
+            let cx = parseInt(kor.getAttribute("x"));
+            let cy = parseInt(kor.getAttribute("y"));
+
+            if ((cx+190>=800) || (cx<-30)) {
+                vx = vx*-1;
+            }
+
+            if ((cy+130>=600) || (cy<-20)) {
+                vy = vy*-1;
+            }
+
+            AnimFrameId = requestAnimationFrame(animate);
+        }
+
+        function stop() {
+            cancelAnimationFrame(AnimFrameId);
+        }
+
+        kor.addEventListener("mouseover", stop);
+        kor.addEventListener("mouseout", animate);
+
+        animate();
+    </script>
+</body>
+</html>
